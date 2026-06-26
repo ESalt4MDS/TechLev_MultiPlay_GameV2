@@ -74,6 +74,9 @@ public:
 
 	void NPG_TakeDamage(float _Damage, class ANPG_PlayerState* _PlayerThatDealtDamage);
 
+	UFUNCTION(BlueprintPure)
+	float GetPlayerHealth();
+
 protected:
 
 	/** Initialize input action bindings */

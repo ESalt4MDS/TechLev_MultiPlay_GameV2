@@ -5,9 +5,9 @@
 #include "NPG_GameMode_Match.h"
 #include "Net/UnrealNetwork.h"
 
-void ANPG_PlayerState::GiveElimination()
+void ANPG_PlayerState::GiveScore()
 {
-	Eliminations++;
+	PlayerScore++;
 
 	if (ANPG_GameMode_Match* GameMode = GetWorld()->GetAuthGameMode<ANPG_GameMode_Match>())
 	{
@@ -18,16 +18,16 @@ void ANPG_PlayerState::GiveElimination()
 	}
 }
 
-int ANPG_PlayerState::GetEliminations()
+int ANPG_PlayerState::GetPlayerScore()
 {
-	return Eliminations;
+	return PlayerScore;
 }
 
 void ANPG_PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME(ANPG_PlayerState, Eliminations);
+	DOREPLIFETIME(ANPG_PlayerState, PlayerScore);
 
 
 }

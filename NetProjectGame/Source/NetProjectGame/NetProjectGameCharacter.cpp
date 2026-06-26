@@ -17,6 +17,7 @@
 #include "NetProjectGamePlayerController.h"
 #include "NPG_PlayerState.h"
 #include "NPG_InteractableDoor.h"
+#include "NPG_Collectable.h"
 
 ANetProjectGameCharacter::ANetProjectGameCharacter()
 {
@@ -101,6 +102,11 @@ void ANetProjectGameCharacter::NPG_TakeDamage(float _Damage, ANPG_PlayerState* _
 
 }
 
+float ANetProjectGameCharacter::GetPlayerHealth()
+{
+	return Health;
+}
+
 
 /* shoot a line trace to check if can interact with a door object */
 void ANetProjectGameCharacter::InteractTrace()
@@ -141,7 +147,7 @@ void ANetProjectGameCharacter::Die(ANPG_PlayerState* _PlayerThatEliminatedYou)
 
 	if (_PlayerThatEliminatedYou)
 	{
-		_PlayerThatEliminatedYou->GiveElimination();
+		_PlayerThatEliminatedYou->GiveScore();
 	}
 
 	Destroy();
@@ -236,6 +242,14 @@ void ANetProjectGameCharacter::InteractObject_Implementation(AActor* _Actor)
 		if (InteractableDoor)
 		{
 			InteractableDoor->ToggleDoor();
+		}
+
+		ANPG_Collectable* Collectable = Cast<ANPG_Collectable>(_Actor);
+		if (Collectable)
+		{
+			//GetPlayerState<ANPG_PlayerState>()->GiveScore();
+			Collectable->UpdatePlayerScore(GetPlayerState<ANPG_PlayerState>());
+			//Collectable->Destroy();
 		}
 	}
 }

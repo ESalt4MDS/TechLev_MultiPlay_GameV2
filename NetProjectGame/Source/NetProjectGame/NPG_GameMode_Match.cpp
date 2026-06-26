@@ -30,7 +30,7 @@ void ANPG_GameMode_Match::CheckForWinner()
 		{
 			if (ANPG_PlayerState* NPGPlayerState = Cast<ANPG_PlayerState>(iter))
 			{
-				if (NPGPlayerState->GetEliminations() >= 5)
+				if (NPGPlayerState->GetPlayerScore() >= 5)
 				{
 					NPGGameState->SetWinner(NPGPlayerState);
 

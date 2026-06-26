@@ -17,13 +17,13 @@ class NETPROJECTGAME_API ANPG_PlayerState : public APlayerState
 protected:
 
 	UPROPERTY(Replicated)
-	int Eliminations = 0;
+	int PlayerScore = 0;
 
 public:
 
-	void GiveElimination();
+	void GiveScore();
 
 	UFUNCTION(BlueprintPure)
-	int GetEliminations();
+	int GetPlayerScore();
 
 };
