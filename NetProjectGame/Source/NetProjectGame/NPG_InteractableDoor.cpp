@@ -18,13 +18,9 @@ ANPG_InteractableDoor::ANPG_InteractableDoor()
 
 }
 
+/* Set the actor to open or closed location (position) when interacted with by player */
 void ANPG_InteractableDoor::ToggleDoor()
 {
-	//if (HasAuthority())
-	//{
-	//	Destroy();
-	//}
-
 	IsOpen = !IsOpen;
 
 	if (IsOpen)

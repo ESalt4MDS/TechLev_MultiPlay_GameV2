@@ -17,6 +17,7 @@ ANPG_Collectable::ANPG_Collectable()
 
 }
 
+/* Updates players score and destroys its self */
 void ANPG_Collectable::UpdatePlayerScore(ANPG_PlayerState* _PlayerCollected)
 {
 	_PlayerCollected->GiveScore();

@@ -1,5 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+//************************************************************************
+//Bachelor of Software Engineering
+//Media Design School
+//Auckland
+//New Zealand
+//
+//File Name : [NPG_GameInstance.h]
+//Description : [the game instance]
+//Author : [Elijah Salt]
+//Email : [elijah.salt@mds.ac.nz]
+//
+//(c) Elijah Salt
+//************************************************************************
 #pragma once
 
 #include "NetProjectGame.h"

@@ -1,5 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+//************************************************************************
+//Bachelor of Software Engineering
+//Media Design School
+//Auckland
+//New Zealand
+//
+//File Name : [NPG_Projectile.h]
+//Description : [an actor the player shoots to do damage to other players]
+//Author : [Elijah Salt]
+//Email : [elijah.salt@mds.ac.nz]
+//
+//(c) Elijah Salt
+//************************************************************************
 #pragma once
 
 #include "CoreMinimal.h"
