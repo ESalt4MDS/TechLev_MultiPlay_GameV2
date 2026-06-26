@@ -101,10 +101,6 @@ void ANetProjectGameCharacter::NPG_TakeDamage(float _Damage, ANPG_PlayerState* _
 
 }
 
-void ANetProjectGameCharacter::ToggleDoor_Implementation(ANPG_InteractableDoor* _Door)
-{
-	_Door->ToggleDoor();
-}
 
 /* shoot a line trace to check if can interact with a door object */
 void ANetProjectGameCharacter::InteractTrace()
@@ -121,21 +117,21 @@ void ANetProjectGameCharacter::InteractTrace()
 	//line trace
 	GetWorld()->LineTraceSingleByChannel(InteractHitResult, TraceStart, TraceEnd, ECC_Visibility);
 
+	InteractTarget = InteractHitResult.GetActor();
+
 	//check if hit an actor
-	if (InteractHitResult.GetActor())
+	if (InteractTarget)
 	{	
-		ANPG_InteractableDoor* InteractableDoor = Cast<ANPG_InteractableDoor>(InteractHitResult.GetActor());
+		GEngine->AddOnScreenDebugMessage(1, 0.1f, FColor::Green, "Server: " + InteractTarget->GetName(), true, FVector2D(4, 4));
 
-		if (InteractableDoor)
+		if (InteractTarget)
 		{
-			InteractTarget = InteractHitResult.GetActor();
-
-			ToggleDoor(InteractableDoor);
+			InteractObject(InteractTarget);
 		}
-		else
-		{
-			InteractTarget = nullptr;
-		}
+	}
+	else
+	{
+		InteractTarget = nullptr;
 	}
 }
 
@@ -230,6 +226,18 @@ void ANetProjectGameCharacter::ServerSpawnCube_Implementation()
 	FTransform SpawnTransform(GetActorLocation() + GetActorForwardVector() * 100.0f); // 1 meter infront of player
 
 	ANPG_Cube* SpawnedCube = GetWorld()->SpawnActor<ANPG_Cube>(CubeClass, SpawnTransform);
+}
+
+void ANetProjectGameCharacter::InteractObject_Implementation(AActor* _Actor)
+{
+	if (_Actor)
+	{
+		ANPG_InteractableDoor* InteractableDoor = Cast<ANPG_InteractableDoor>(_Actor);
+		if (InteractableDoor)
+		{
+			InteractableDoor->ToggleDoor();
+		}
+	}
 }
 
 void ANetProjectGameCharacter::DoMove(float Right, float Forward)

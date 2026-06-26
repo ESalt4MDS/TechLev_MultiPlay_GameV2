@@ -150,6 +150,7 @@ void UNPG_GameInstance::StartGame(bool _bLan)
 {
 	ULocalPlayer* const Player = GetFirstGamePlayer();
 
+	//TODO: change to false for steam, true for LAN
 	HostSession(Player->GetPreferredUniqueNetId().GetUniqueNetId(), NAME_GameSession, false, true, 8);
 }
 
@@ -157,6 +158,7 @@ void UNPG_GameInstance::FindGames(bool _bLan)
 {
 	ULocalPlayer* const Player = GetFirstGamePlayer();
 
+	//TODO: change to false for steam, true for LAN
 	FindSessions(Player->GetPreferredUniqueNetId().GetUniqueNetId(), false);
 }
 

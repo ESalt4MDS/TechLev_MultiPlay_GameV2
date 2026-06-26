@@ -100,11 +100,14 @@ protected:
 	void ServerAttack();
 
 	UFUNCTION(Server, Reliable)
-	void ToggleDoor(ANPG_InteractableDoor* _Door);
+	void InteractObject(AActor* _Actor);
 
 	//interact stuff
 	void InteractTrace();
+
+	UPROPERTY(Replicated);
 	float InteractRange = 500.0f;
+
 	AActor* InteractTarget = nullptr;
 
 	void Die(ANPG_PlayerState* _PlayerThatEliminatedYou);
