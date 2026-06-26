@@ -121,6 +121,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Replicated, Category = "Player")
 	TObjectPtr<class USoundBase> ShootSound = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, Replicated, Category = "Player")
+	class UParticleSystem* ShootParticle = nullptr;
+
 	UFUNCTION(Server, Reliable)
 	void ServerSFX();
 

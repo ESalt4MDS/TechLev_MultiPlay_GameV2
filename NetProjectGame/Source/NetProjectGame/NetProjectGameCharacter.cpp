@@ -163,6 +163,16 @@ void ANetProjectGameCharacter::MultiCastSFX_Implementation()
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, ShootSound, GetActorLocation());
 	}
+
+	if (ShootParticle)
+	{
+		FTransform SpawnTransform;
+		SpawnTransform.SetLocation(GetMesh()->GetBoneLocation("hand_l"));
+		SpawnTransform.SetRotation(GetControlRotation().Quaternion());
+
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(),
+			ShootParticle, SpawnTransform, true);
+	}
 }
 
 void ANetProjectGameCharacter::ServerSFX_Implementation()
