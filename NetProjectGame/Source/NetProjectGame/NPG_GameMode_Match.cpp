@@ -15,8 +15,14 @@ void ANPG_GameMode_Match::RespawnPlayer(APlayerController* _PlayerToRespawn)
 	//respawn only if a match is in progress
 	if (IsMatchInProgress())
 	{
-		RestartPlayer(_PlayerToRespawn);
-		//RestartPlayerAtTransform()
+		// RestartPlayer(_PlayerToRespawn);
+
+		int32 RandIndex = FMath::RandRange(0, SpawnLocations.Num() - 1);
+		if (SpawnLocations.IsValidIndex(RandIndex))
+		{
+			FTransform SpawnTransform(SpawnLocations[RandIndex]);
+			RestartPlayerAtTransform(_PlayerToRespawn, SpawnTransform);
+		}
 	}
 }
 

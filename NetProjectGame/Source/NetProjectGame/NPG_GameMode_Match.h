@@ -20,6 +20,9 @@ protected:
 
 	FTimerHandle MatchRestartDelayTimer;
 
+	UPROPERTY(EditDefaultsOnly, Category = "GameModeMatch")
+	TArray<FVector> SpawnLocations;
+
 public:
 
 	void RespawnPlayer(APlayerController* _PlayerToRespawn);

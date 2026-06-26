@@ -109,7 +109,7 @@ protected:
 	void InteractTrace();
 
 	UPROPERTY(Replicated);
-	float InteractRange = 500.0f;
+	float InteractRange = 1000.0f;
 
 	AActor* InteractTarget = nullptr;
 
@@ -117,6 +117,15 @@ protected:
 
 	UPROPERTY(Replicated);
 	float Health = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly, Replicated, Category = "Player")
+	TObjectPtr<class USoundBase> ShootSound = nullptr;
+
+	UFUNCTION(Server, Reliable)
+	void ServerSFX();
+
+	UFUNCTION(NetMulticast, Unreliable)
+	void MultiCastSFX();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
 	TSubclassOf<class ANPG_Cube> CubeClass = nullptr;

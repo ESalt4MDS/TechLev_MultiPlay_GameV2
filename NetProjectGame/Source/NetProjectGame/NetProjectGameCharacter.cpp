@@ -18,6 +18,10 @@
 #include "NPG_PlayerState.h"
 #include "NPG_InteractableDoor.h"
 #include "NPG_Collectable.h"
+#include "Sound/SoundBase.h"
+#include "AudioDevice.h"
+#include "Kismet/GameplayStatics.h"
+
 
 ANetProjectGameCharacter::ANetProjectGameCharacter()
 {
@@ -153,6 +157,19 @@ void ANetProjectGameCharacter::Die(ANPG_PlayerState* _PlayerThatEliminatedYou)
 	Destroy();
 }
 
+void ANetProjectGameCharacter::MultiCastSFX_Implementation()
+{
+	if (ShootSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, ShootSound, GetActorLocation());
+	}
+}
+
+void ANetProjectGameCharacter::ServerSFX_Implementation()
+{
+	MultiCastSFX();
+}
+
 void ANetProjectGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
@@ -214,6 +231,20 @@ void ANetProjectGameCharacter::Interact(const FInputActionValue& Value)
 
 void ANetProjectGameCharacter::ServerAttack_Implementation()
 {	
+	//if (ShootSound)
+	//{
+	//	UGameplayStatics::PlaySoundAtLocation(this, ShootSound, GetActorLocation());
+	//}
+
+	if (HasAuthority())
+	{
+		MultiCastSFX();
+	}
+	else
+	{
+		ServerSFX();
+	}
+
 	FTransform SpawnTransform;
 	SpawnTransform.SetLocation(GetMesh()->GetBoneLocation("hand_l"));
 	SpawnTransform.SetRotation(GetControlRotation().Quaternion());
