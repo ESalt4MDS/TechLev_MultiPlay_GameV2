@@ -30,7 +30,6 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Door")
 	FVector OpenPosition = FVector::ZeroVector;
 
-	UPROPERTY(Replicated);
 	bool IsOpen = false;
 
 public:	
